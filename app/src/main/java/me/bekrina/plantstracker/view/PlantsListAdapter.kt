@@ -20,11 +20,12 @@ class PlantsListAdapter(private val myDataset: Array<String>) :
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): MyViewHolder {
             // create a new view
-            val textView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.my_text_view, parent, false) as TextView
+            //val textView = LayoutInflater.from(parent.context)
+            //    .inflate(R.layout.my_text_view, parent, false) as TextView
             // set the view's size, margins, paddings and layout parameters
             //...
-            return MyViewHolder(textView)
+            //return MyViewHolder(textView)
+            return MyViewHolder(TextView(parent.context))
         }
 
         // Replace the contents of a view (invoked by the layout manager)
@@ -37,4 +38,3 @@ class PlantsListAdapter(private val myDataset: Array<String>) :
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = myDataset.size
     }
-}

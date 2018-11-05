@@ -16,7 +16,7 @@ class PlantListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_plant_list)
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = PlantsListAdapter(myDataset)
+        //viewAdapter = PlantsListAdapter(myDataset)
 
         plantsListRecyclerView = findViewById<RecyclerView>(R.id.plants_list_recycler_view).apply {
             // use this setting to improve performance if you know that changes
@@ -27,7 +27,7 @@ class PlantListActivity : AppCompatActivity() {
             layoutManager = viewManager
 
             // specify an viewAdapter (see also next example)
-            adapter = viewAdapter
+            //adapter = viewAdapter
 
         }
     }

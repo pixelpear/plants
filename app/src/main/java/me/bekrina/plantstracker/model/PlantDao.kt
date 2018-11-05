@@ -8,5 +8,5 @@ import android.arch.persistence.room.Query
 @Dao
 interface PlantDao {
     @Query("SELECT * FROM plants ORDER BY name DESC")
-    fun getAllPlantsDesc(): MutableLiveData<List<Plant>>
+    fun getAllPlantsDesc(): LiveData<List<Plant>>
 }

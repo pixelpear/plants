@@ -4,19 +4,22 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
+import android.support.annotation.NonNull
 import org.threeten.bp.OffsetDateTime
 
 @Entity(tableName = "plants")
 class Plant {
+    @NonNull
     @PrimaryKey(autoGenerate = true)
-    private var uid: Int = 0
+    @ColumnInfo(name = "id", typeAffinity = ColumnInfo.INTEGER)
+    var id: Int = 0
 
     @ColumnInfo(name = "name", typeAffinity = ColumnInfo.TEXT)
-    private lateinit var name: String
+    lateinit var name: String
 
     @ColumnInfo(name = "type", typeAffinity = ColumnInfo.TEXT)
-    private lateinit var type: String
+    lateinit var type: String
 
     @ColumnInfo(name = "watering_period", typeAffinity = ColumnInfo.INTEGER)
-    private var wateringPeriod: Int = 0
+    var wateringPeriod: Int = 0
 }
