@@ -9,7 +9,7 @@ import me.bekrina.plantstracker.model.Plant
 import me.bekrina.plantstracker.model.PlantDao
 import me.bekrina.plantstracker.model.Watering
 
-@Database(entities = [Plant::class, Watering::class], version = 0)
+@Database(entities = [Plant::class, Watering::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun plantDao(): PlantDao

@@ -1,5 +1,6 @@
 package me.bekrina.plantstracker.dagger
 
+import android.app.Application
 import android.arch.persistence.room.Room
 import dagger.Module
 import dagger.Provides
@@ -10,14 +11,11 @@ import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
-    @Inject lateinit var applicationContext: App
     val DATABASE_NAME = "Local Database"
-    lateinit var database: AppDatabase
 
     @Provides
     @Singleton
-    fun injectDatabase(): AppDatabase {
-        database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, DATABASE_NAME).build()
-        return database
+    fun provideDatabase(applicationContext: Application): AppDatabase {
+        return Room.databaseBuilder(applicationContext, AppDatabase::class.java, DATABASE_NAME).build()
     }
 }
