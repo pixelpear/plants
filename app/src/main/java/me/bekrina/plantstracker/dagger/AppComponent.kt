@@ -2,8 +2,7 @@ package me.bekrina.plantstracker.dagger
 
 import android.app.Application
 import dagger.Component
-import me.bekrina.plantstracker.utility.App
-import me.bekrina.plantstracker.utility.AppDatabase
+import me.bekrina.plantstracker.room.AppDatabase
 import me.bekrina.plantstracker.viewmodel.PlantsViewModel
 import javax.inject.Singleton
 

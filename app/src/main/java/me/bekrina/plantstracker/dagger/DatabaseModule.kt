@@ -4,9 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import dagger.Module
 import dagger.Provides
-import me.bekrina.plantstracker.utility.App
-import me.bekrina.plantstracker.utility.AppDatabase
-import javax.inject.Inject
+import me.bekrina.plantstracker.room.AppDatabase
 import javax.inject.Singleton
 
 @Module
