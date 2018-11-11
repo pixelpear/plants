@@ -1,12 +1,14 @@
 package me.bekrina.plantstracker.view
 
+import android.arch.lifecycle.LiveData
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import me.bekrina.plantstracker.R
+import me.bekrina.plantstracker.model.Plant
 
-class PlantsListAdapter(private val myDataset: Array<String>) :
+class PlantsListAdapter(private val myDataset: LiveData<List<Plant>>) :
         RecyclerView.Adapter<PlantsListAdapter.MyViewHolder>() {
 
         // Provide a reference to the views for each data item
@@ -21,7 +23,7 @@ class PlantsListAdapter(private val myDataset: Array<String>) :
                                         viewType: Int): MyViewHolder {
             // create a new view
             val textView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.my_text_view, parent, false) as TextView
+                .inflate(R.layout.plant_list_item, parent, false) as TextView
             // set the view's size, margins, paddings and layout parameters
             //...
             return MyViewHolder(textView)
@@ -31,10 +33,9 @@ class PlantsListAdapter(private val myDataset: Array<String>) :
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.textView.text = myDataset[position]
+            holder.textView.text = myDataset.value?.get(position)?.name ?: ""
         }
 
         // Return the size of your dataset (invoked by the layout manager)
-        override fun getItemCount() = myDataset.size
+        override fun getItemCount() = myDataset.value?.size ?: 0
     }
-}

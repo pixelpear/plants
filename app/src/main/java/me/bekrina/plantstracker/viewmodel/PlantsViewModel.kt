@@ -1,43 +1,40 @@
 package me.bekrina.plantstracker.viewmodel
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.os.AsyncTask
+import me.bekrina.plantstracker.dagger.AppModule
+import me.bekrina.plantstracker.dagger.DaggerAppComponent
+import me.bekrina.plantstracker.dagger.DatabaseModule
 import me.bekrina.plantstracker.model.Plant
-import me.bekrina.plantstracker.model.PlantDao
-import me.bekrina.plantstracker.utility.App
-import org.threeten.bp.OffsetDateTime
-import java.util.concurrent.ExecutionException
+import me.bekrina.plantstracker.repository.Repository
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PlantsViewModel: ViewModel() {
-    private lateinit var plants: MutableLiveData<List<Plant>>
-    private lateinit var plantDao: PlantDao
+@Singleton
+class PlantsViewModel(val app: Application): AndroidViewModel(app) {
+    //TODO: make viewmodelfactory and module for it
+    @Inject
+    lateinit var repository: Repository
+    private lateinit var plants: LiveData<List<Plant>>
 
     init {
-        // inject database
-        plantDao = database.plantDao()
+        DaggerAppComponent.builder()
+            .appModule(AppModule(app))
+            .databaseModule(DatabaseModule())
+            .build()
+            .injectViewModel(this)
     }
 
-    fun getPlantsDesc(): MutableLiveData<List<Plant>> {
+    fun getPlantsDesc(): LiveData<List<Plant>> {
         if (!::plants.isInitialized) {
-            plants = MutableLiveData()
-            plants = loadPlantsDesc()
+            plants = repository.getAllPlantsNameDesc()
         }
         return plants
     }
 
-    private class getFutureEventsAsynkTask internal constructor(private val plantDao: PlantDao) :
-        AsyncTask<Any, Any, MutableLiveData<List<Plant>>>() {
-
-        override fun doInBackground(vararg params: Any?): MutableLiveData<List<Plant>> {
-            return plantDao.getAllPlantsDesc()
-        }
+    fun insertPlant(plant: Plant) {
+        repository.insertPlant(plant)
     }
-
-    fun loadPlantsDesc(plantDao: PlantDao): MutableLiveData<List<Plant>> {
-        return getFutureEventsAsynkTask(plantDao).execute().get()
-    }
-
 
 }
