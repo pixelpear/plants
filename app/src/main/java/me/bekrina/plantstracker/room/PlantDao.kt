@@ -10,7 +10,7 @@ import me.bekrina.plantstracker.model.Plant
 @Dao
 interface PlantDao {
     @Query("SELECT * FROM plants ORDER BY name DESC")
-    fun getAllPlantsDesc(): LiveData<List<Plant>>
+    fun getAllPlantsNameDesc(): LiveData<List<Plant>>
 
     @Insert
     fun insertPlant(plant: Plant)

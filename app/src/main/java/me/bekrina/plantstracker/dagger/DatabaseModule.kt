@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
-    val DATABASE_NAME = "Local Database"
+    private val DATABASE_NAME = "Local Database"
 
     @Provides
     @Singleton
