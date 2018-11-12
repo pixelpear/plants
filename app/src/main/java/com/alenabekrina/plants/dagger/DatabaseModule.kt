@@ -1,10 +1,10 @@
-package me.bekrina.plantstracker.dagger
+package com.alenabekrina.plants.dagger
 
 import android.app.Application
 import android.arch.persistence.room.Room
 import dagger.Module
 import dagger.Provides
-import me.bekrina.plantstracker.room.AppDatabase
+import com.alenabekrina.plants.room.AppDatabase
 import javax.inject.Singleton
 
 @Module

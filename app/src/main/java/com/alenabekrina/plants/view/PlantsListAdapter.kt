@@ -1,12 +1,12 @@
-package me.bekrina.plantstracker.view
+package com.alenabekrina.plants.view
 
 import android.arch.lifecycle.LiveData
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import me.bekrina.plantstracker.R
-import me.bekrina.plantstracker.model.Plant
+import com.alenabekrina.plants.R
+import com.alenabekrina.plants.model.Plant
 
 class PlantsListAdapter(private val myDataset: LiveData<List<Plant>>) :
         RecyclerView.Adapter<PlantsListAdapter.MyViewHolder>() {

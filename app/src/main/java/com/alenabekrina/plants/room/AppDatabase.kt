@@ -1,11 +1,11 @@
-package me.bekrina.plantstracker.room
+package com.alenabekrina.plants.room
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
-import me.bekrina.plantstracker.model.Converters
-import me.bekrina.plantstracker.model.Plant
-import me.bekrina.plantstracker.model.Watering
+import com.alenabekrina.plants.model.Converters
+import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.model.Watering
 
 @Database(entities = [Plant::class, Watering::class], version = 1)
 @TypeConverters(Converters::class)

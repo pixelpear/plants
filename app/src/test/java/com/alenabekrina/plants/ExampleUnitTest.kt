@@ -1,4 +1,4 @@
-package me.bekrina.plantstracker
+package com.alenabekrina.plants
 
 import org.junit.Test
 

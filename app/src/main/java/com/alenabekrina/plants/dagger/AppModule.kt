@@ -1,4 +1,4 @@
-package me.bekrina.plantstracker.dagger
+package com.alenabekrina.plants.dagger
 
 import android.app.Application
 import dagger.Module

@@ -1,4 +1,4 @@
-package me.bekrina.plantstracker
+package com.alenabekrina.plants
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
