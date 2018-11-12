@@ -1,9 +1,9 @@
-package me.bekrina.plantstracker.dagger
+package com.alenabekrina.plants.dagger
 
 import android.app.Application
 import dagger.Component
-import me.bekrina.plantstracker.room.AppDatabase
-import me.bekrina.plantstracker.viewmodel.PlantsViewModel
+import com.alenabekrina.plants.room.AppDatabase
+import com.alenabekrina.plants.viewmodel.PlantsViewModel
 import javax.inject.Singleton
 
 @Singleton

@@ -1,4 +1,4 @@
-package me.bekrina.plantstracker.view
+package com.alenabekrina.plants.view
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import me.bekrina.plantstracker.R
-import me.bekrina.plantstracker.model.Plant
-import me.bekrina.plantstracker.viewmodel.PlantsViewModel
+import com.alenabekrina.plants.R
+import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.viewmodel.PlantsViewModel
 
 class PlantListActivity : AppCompatActivity() {
     private lateinit var plantsListRecyclerView: RecyclerView

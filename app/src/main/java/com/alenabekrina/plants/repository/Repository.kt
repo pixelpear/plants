@@ -1,10 +1,10 @@
-package me.bekrina.plantstracker.repository
+package com.alenabekrina.plants.repository
 
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
-import me.bekrina.plantstracker.model.Plant
-import me.bekrina.plantstracker.room.AppDatabase
-import me.bekrina.plantstracker.room.PlantDao
+import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.room.AppDatabase
+import com.alenabekrina.plants.room.PlantDao
 import javax.inject.Inject
 import javax.inject.Singleton
 

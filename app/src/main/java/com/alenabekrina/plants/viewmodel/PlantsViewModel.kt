@@ -1,13 +1,13 @@
-package me.bekrina.plantstracker.viewmodel
+package com.alenabekrina.plants.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import me.bekrina.plantstracker.dagger.AppModule
-import me.bekrina.plantstracker.dagger.DaggerAppComponent
-import me.bekrina.plantstracker.dagger.DatabaseModule
-import me.bekrina.plantstracker.model.Plant
-import me.bekrina.plantstracker.repository.Repository
+import com.alenabekrina.plants.dagger.AppModule
+import com.alenabekrina.plants.dagger.DaggerAppComponent
+import com.alenabekrina.plants.dagger.DatabaseModule
+import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.repository.Repository
 import javax.inject.Inject
 import javax.inject.Singleton
 
