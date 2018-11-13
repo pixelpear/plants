@@ -14,14 +14,11 @@ import com.alenabekrina.plants.viewmodel.PlantsViewModel
 class PlantListActivity : AppCompatActivity() {
     private lateinit var plantsListRecyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var plantsData: LiveData<List<Plant>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_list)
-
-        viewManager = LinearLayoutManager(this)
 
         val viewModel = ViewModelProviders.of(this).get(PlantsViewModel::class.java)
 
@@ -32,9 +29,6 @@ class PlantListActivity : AppCompatActivity() {
                 // use this setting to improve performance if you know that changes
                 // in content do not change the layout size of the RecyclerView
                 setHasFixedSize(true)
-
-                // use a linear layout manager
-                layoutManager = viewManager
 
                 // specify an viewAdapter (see also next example)
                 adapter = viewAdapter

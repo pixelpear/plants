@@ -11,7 +11,6 @@ import com.alenabekrina.plants.repository.Repository
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class PlantsViewModel(val app: Application): AndroidViewModel(app) {
     //TODO: make viewmodelfactory and module for it
     @Inject
