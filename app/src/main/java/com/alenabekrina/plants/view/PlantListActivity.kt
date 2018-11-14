@@ -3,10 +3,13 @@ package com.alenabekrina.plants.view
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
@@ -35,7 +38,11 @@ class PlantListActivity : AppCompatActivity() {
             }
         })
 
-
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this, AddPlantActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
