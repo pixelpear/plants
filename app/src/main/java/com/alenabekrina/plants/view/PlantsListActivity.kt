@@ -20,6 +20,7 @@ import javax.inject.Inject
 class PlantsListActivity : AppCompatActivity() {
     private lateinit var plantsListRecyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var plantsData: LiveData<List<Plant>>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -44,8 +45,13 @@ class PlantsListActivity : AppCompatActivity() {
 
                 // specify an viewAdapter (see also next example)
                 adapter = viewAdapter
+
+                // use a linear layout manager
+                layoutManager = viewManager
             }
         })
+
+        viewManager = LinearLayoutManager(this)
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
