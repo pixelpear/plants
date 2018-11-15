@@ -2,6 +2,7 @@ package com.alenabekrina.plants.view
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -10,20 +11,28 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
+import javax.inject.Inject
 
-class PlantListActivity : AppCompatActivity() {
+class PlantsListActivity : AppCompatActivity() {
     private lateinit var plantsListRecyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var plantsData: LiveData<List<Plant>>
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_list)
 
-        val viewModel = ViewModelProviders.of(this).get(PlantsViewModel::class.java)
+
+        val app = application as App
+        app.component.injectActivity(this)
+
+        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantsViewModel::class.java)
 
         plantsData = viewModel.getPlantsDesc()
         plantsData.observe(this, Observer<List<Plant>> {
