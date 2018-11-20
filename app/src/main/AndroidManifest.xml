@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.alenabekrina.plants.view.AddPlantActivity">
+        <activity android:name="com.alenabekrina.plants.view.AddPlantActivity"
+                  android:label="@string/addplantactivity_label">
         </activity>
     </application>
 

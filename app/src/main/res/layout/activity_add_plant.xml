@@ -4,23 +4,57 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name_label"
+        app:layout_constraintTop_toTopOf="parent"/>
     <EditText android:id="@+id/editText_name"
               android:layout_width="match_parent"
               android:layout_height="64dp"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintTop_toTopOf="parent"/>
+              app:layout_constraintTop_toBottomOf="@id/textView_name"/>
+    <TextView
+        android:id="@+id/textView_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_label"
+        app:layout_constraintTop_toBottomOf="@id/editText_name"/>
+
     <EditText android:id="@+id/editText_type"
               android:layout_width="match_parent"
               android:layout_height="64dp"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/editText_name"/>
-    <EditText android:id="@+id/editTextwatering_period"
-              android:layout_width="match_parent"
-              android:layout_height="64dp"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/editText_type"/>
+              app:layout_constraintTop_toBottomOf="@id/textView_type"/>
+    <TextView
+        android:id="@+id/textView_watering_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/watering_interval_label"
+        app:layout_constraintTop_toBottomOf="@+id/editText_type"/>
+
+    <NumberPicker
+        android:id="@+id/numberpicker_watering_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/textView_watering_interval" />
+
+    <TextView
+        android:id="@+id/textView_days_since_last_watering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/days_since_last_watering_label"
+        app:layout_constraintLeft_toRightOf="@+id/textView_watering_interval"
+        app:layout_constraintTop_toBottomOf="@+id/editText_type"/>
+
+    <NumberPicker
+        android:id="@+id/numberpicker_days_since_last_watering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/numberpicker_watering_interval"
+        app:layout_constraintTop_toBottomOf="@+id/textView_days_since_last_watering" />
 
 </android.support.constraint.ConstraintLayout>
