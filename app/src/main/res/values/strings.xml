@@ -2,7 +2,8 @@
     <string name="app_name">Plants Tracker</string>
     <string name="addplantactivity_label">New Plant</string>
     <string name="name_label">Name</string>
-    <string name="type_label">Type</string>
+    <string name="type_label">Type (optional)</string>
     <string name="watering_interval_label">Watering interval</string>
     <string name="days_since_last_watering_label">Days since last watering</string>
+    <string name="turn_on_notifications_label">Notify at day of watering</string>
 </resources>
