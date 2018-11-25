@@ -16,7 +16,12 @@ class PlantsViewModel @Inject constructor(private val repository: Repository): V
         return plants
     }
 
-    fun insertPlant(plant: Plant) {
+    fun insertPlant(name: String, type: String, wateringInterval: String, daysSinceLastWatering: String) {
+        val plant = Plant()
+        plant.name = name
+        plant.type = type
+        plant.wateringInterval = wateringInterval.toInt()
+        plant.daysSinceLastWatering = daysSinceLastWatering.toInt()
         repository.insertPlant(plant)
     }
 

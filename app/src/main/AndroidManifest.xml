@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.alenabekrina.plants.view.AddPlantActivity"
-                  android:label="@string/addplantactivity_label">
+                  android:label="@string/addplantactivity_label"
+                  android:parentActivityName="com.alenabekrina.plants.view.PlantsListActivity">
         </activity>
     </application>
 

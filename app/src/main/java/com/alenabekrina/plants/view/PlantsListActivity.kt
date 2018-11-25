@@ -29,9 +29,8 @@ class PlantsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_list)
 
-
         val app = application as App
-        app.component.injectActivity(this)
+        app.component.injectPlantsListActivity(this)
 
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantsViewModel::class.java)
 
@@ -58,7 +57,5 @@ class PlantsListActivity : AppCompatActivity() {
             val intent = Intent(this, AddPlantActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 }

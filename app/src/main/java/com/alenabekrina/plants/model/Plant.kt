@@ -19,5 +19,8 @@ class Plant {
     lateinit var type: String
 
     @ColumnInfo(name = "watering_period", typeAffinity = ColumnInfo.INTEGER)
-    var wateringPeriod: Int = 0
+    var wateringInterval: Int = 0
+
+    @ColumnInfo(name = "days_since_last_watering", typeAffinity = ColumnInfo.INTEGER)
+    var daysSinceLastWatering: Int = 0
 }
