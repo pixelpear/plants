@@ -18,7 +18,7 @@ class Repository @Inject constructor(database: AppDatabase){
     }
 
     fun insertPlant(plant: Plant) {
-        plantDao.insertPlant(plant)
+        InsertPlantAsynkTask(plantDao).execute(plant)
     }
 
     fun deletePlant(plant: Plant) {
@@ -29,7 +29,15 @@ class Repository @Inject constructor(database: AppDatabase){
         return GetAllPlantsNameDescAsynkTask(plantDao).execute().get()
     }
 
-    private class GetAllPlantsNameDescAsynkTask internal constructor(private val plantDao: PlantDao) :
+    private class InsertPlantAsynkTask internal constructor(private val plantDao: PlantDao):
+        AsyncTask<Plant, Any, Unit>() {
+        override fun doInBackground(vararg params: Plant) {
+            return plantDao.insertPlant(params[0])
+        }
+
+    }
+
+    private class GetAllPlantsNameDescAsynkTask internal constructor(private val plantDao: PlantDao):
         AsyncTask<Any, Any, LiveData<List<Plant>>>() {
 
         override fun doInBackground(vararg params: Any?): LiveData<List<Plant>> {
@@ -45,7 +53,7 @@ class Repository @Inject constructor(database: AppDatabase){
             val plant = Plant()
             plant.name = "Kate"
             plant.type = "Palm"
-            plant.wateringPeriod = 2
+            plant.wateringInterval = 2
             dao.insertPlant(plant)
 
             return null

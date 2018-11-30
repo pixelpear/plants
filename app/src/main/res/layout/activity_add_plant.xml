@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_padding"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name_label"
+        app:layout_constraintBottom_toTopOf="@+id/editText_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textView_type"
+        app:layout_constraintTop_toBottomOf="@+id/textView_name"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/type_label"
+        app:layout_constraintBottom_toTopOf="@+id/editText_type"
+        app:layout_constraintTop_toBottomOf="@+id/editText_name"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editText_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textView_watering_interval"
+        app:layout_constraintTop_toBottomOf="@+id/textView_type"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView_watering_interval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/watering_interval_label"
+        app:layout_constraintBottom_toTopOf="@+id/editText_watering_interval"
+        app:layout_constraintTop_toBottomOf="@+id/editText_type"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editText_watering_interval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/textView_days_since_last_watering"
+        app:layout_constraintTop_toBottomOf="@+id/textView_watering_interval"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView_days_since_last_watering"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/days_since_last_watering_label"
+        app:layout_constraintBottom_toTopOf="@+id/editText_days_since_last_watering"
+        app:layout_constraintTop_toBottomOf="@+id/editText_watering_interval"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editText_days_since_last_watering"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/switch_turn_on_notifications"
+        app:layout_constraintTop_toBottomOf="@+id/textView_days_since_last_watering"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Switch
+        android:id="@+id/switch_turn_on_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/turn_on_notifications_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_days_since_last_watering"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+</android.support.constraint.ConstraintLayout>
