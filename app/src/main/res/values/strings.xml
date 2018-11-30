@@ -7,4 +7,5 @@
     <string name="days_since_last_watering_label">Days since last watering</string>
     <string name="turn_on_notifications_label">Notify at day of watering</string>
     <string name="action_favorite">Favorite</string>
+    <string name="plant_picture_contentDescription">Plant picture</string>
 </resources>

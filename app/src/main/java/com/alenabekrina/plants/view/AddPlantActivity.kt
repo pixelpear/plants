@@ -11,7 +11,6 @@ import android.view.MenuItem
 import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
-import com.google.common.primitives.UnsignedBytes.toInt
 import kotlinx.android.synthetic.main.activity_add_plant.*
 import javax.inject.Inject
 
