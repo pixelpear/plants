@@ -8,34 +8,43 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.repository.Repository
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
+import javax.inject.Inject
 
 class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
                         private val glide: RequestManager,
                         private val plantsListActivity: PlantsListActivity
 ) :
         RecyclerView.Adapter<PlantsListAdapter.PlantViewHolder>() {
+        @Inject
+        lateinit var repository: Repository
+        var actionMode: ActionMode? = null
+        var selectedPlants = mutableMapOf<Int, Plant>()
 
-    var actionMode: ActionMode? = null
+        fun selectPlant(plant: Plant, holder: PlantViewHolder) {
+            selectedPlants[plant.id] = plant
+            glide.load(R.drawable.plantpic)
+                .into(holder.plantPic)
+        }
 
-    var selectedPlants = mutableMapOf<Int, Plant>()
+        fun unselectPlant(plant: Plant, holder: PlantViewHolder) {
+            selectedPlants.remove(plant.id)
+            val optionsForRoundPic = RequestOptions().circleCrop()
+            glide.load(R.drawable.plantpic)
+                .apply(optionsForRoundPic)
+                .into(holder.plantPic)
+        }
 
-    fun selectPlant(plant: Plant, holder: PlantViewHolder) {
-        selectedPlants[plant.id] = plant
-        glide.load(R.drawable.plantpic)
-            .into(holder.plantPic)
-    }
-
-    fun unselectPlant(plant: Plant, holder: PlantViewHolder) {
-        selectedPlants.remove(plant.id)
-        val optionsForRoundPic = RequestOptions().circleCrop()
-        glide.load(R.drawable.plantpic)
-            .apply(optionsForRoundPic)
-            .into(holder.plantPic)
-    }
+        fun deletePlants() {
+            for (plant in selectedPlants.values) {
+                repository.deletePlant(plant)
+            }
+        }
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -47,7 +56,12 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
 
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): PlantViewHolder {
-            val constraintLayout = LayoutInflater.from(parent.context)
+            val context = parent.context
+            // inject fields by Dagger
+            val app = context.applicationContext as App
+            app.component.injectPlantsListAdapter(this)
+
+            val constraintLayout = LayoutInflater.from(context)
                 .inflate(R.layout.plant_list_item, parent, false) as ConstraintLayout
 
             return PlantViewHolder(constraintLayout)
@@ -85,12 +99,6 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
 
     val mActionModeCallback : ActionMode.Callback = object : ActionMode.Callback {
 
-        override fun onDestroyActionMode(mode: ActionMode?) {
-            // TODO: store selected plants, fix multiple selection
-            actionMode = null
-            notifyDataSetChanged()
-        }
-
         // Called when the action mode is created; startActionMode() was called
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
             // Inflate a menu resource providing context menu items
@@ -109,14 +117,20 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.menu_delete -> {
-                    //TODO delete method
-                    //notifyDataSetChanged()
+                    deletePlants()
                     Log.i("PlantsListActivity", "Delete plant")
                     mode.finish() // Action picked, so close the CAB
                     true
                 }
                 else -> false
             }
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode?) {
+            // TODO: store selected plants, fix multiple selection
+            actionMode = null
+            notifyDataSetChanged()
+            selectedPlants.clear()
         }
     }
 }
