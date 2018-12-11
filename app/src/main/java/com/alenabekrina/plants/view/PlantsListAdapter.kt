@@ -20,14 +20,29 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
         RecyclerView.Adapter<PlantsListAdapter.PlantViewHolder>() {
 
     var actionMode: ActionMode? = null
+
+    var selectedPlants = mutableMapOf<Int, Plant>()
+
+    fun selectPlant(plant: Plant, holder: PlantViewHolder) {
+        selectedPlants[plant.id] = plant
+        glide.load(R.drawable.plantpic)
+            .into(holder.plantPic)
+    }
+
+    fun unselectPlant(plant: Plant, holder: PlantViewHolder) {
+        selectedPlants.remove(plant.id)
+        val optionsForRoundPic = RequestOptions().circleCrop()
+        glide.load(R.drawable.plantpic)
+            .apply(optionsForRoundPic)
+            .into(holder.plantPic)
+    }
+
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder.
         class PlantViewHolder(val layout: ConstraintLayout) : RecyclerView.ViewHolder(layout) {
-            val wholeLayout = layout
             val plantName = layout.findViewById<TextView>(R.id.textView_plant_name)
             val plantPic = layout.findViewById<ImageView>(R.id.imageView_plant_pic)
-            var selected = false
         }
 
         override fun onCreateViewHolder(parent: ViewGroup,
@@ -39,77 +54,69 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
         }
 
         override fun onBindViewHolder(holder: PlantViewHolder, position: Int) {
-            holder.plantName.text = plantsDataset.value?.get(position)?.name ?: ""
+            val plant = plantsDataset.value?.get(position)!!
+            holder.plantName.text = plant.name
 
             val optionsForRoundPic = RequestOptions().circleCrop()
             glide.load(R.drawable.plantpic)
                 .apply(optionsForRoundPic)
                 .into(holder.plantPic)
 
-            val mActionModeCallback : ActionMode.Callback = object : ActionMode.Callback {
-                override fun onDestroyActionMode(mode: ActionMode?) {
-                    // TODO: store selected plants, fix multiple selection
-                    glide.load(R.drawable.plantpic)
-                        .apply(optionsForRoundPic)
-                        .into(holder.plantPic)
-                    actionMode = null
-                }
-
-                // Called when the action mode is created; startActionMode() was called
-                override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-                    // Inflate a menu resource providing context menu items
-                    val inflater: MenuInflater = mode.menuInflater
-                    inflater.inflate(R.menu.plants_list_action_mode_menu, menu)
-                    return true
-                }
-
-                // Called each time the action mode is shown. Always called after onCreateActionMode, but
-                // may be called multiple times if the mode is invalidated.
-                override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-                    return false // Return false if nothing is done
-                }
-
-                // Called when the user selects a contextual menu item
-                override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-                    return when (item.itemId) {
-                        R.id.menu_delete -> {
-                            //TODO delete method
-                            //notifyDataSetChanged()
-                            Log.i("PlantsListActivity", "Delete plant")
-                            mode.finish() // Action picked, so close the CAB
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            }
-
-            holder.wholeLayout.setOnLongClickListener {
+            holder.layout.setOnLongClickListener {
                     if (actionMode == null) {
                         actionMode = plantsListActivity.startActionMode(mActionModeCallback)
-                        glide.load(R.drawable.plantpic).into(holder.plantPic)
-                        holder.selected = true
+                        selectPlant(plant, holder)
                     }
                 true
                 }
 
-            holder.wholeLayout.setOnClickListener {
+            holder.layout.setOnClickListener {
                 if (actionMode != null) {
-                    holder.selected = !holder.selected
-                    if (holder.selected) {
-                        glide.load(R.drawable.plantpic)
-                            .into(holder.plantPic)
-                    } else {
-                        glide.load(R.drawable.plantpic)
-                            .apply(optionsForRoundPic)
-                            .into(holder.plantPic)
-                    }
-                } else {
-                    return@setOnClickListener
-                }
+                    if (selectedPlants[plant.id] == null) {
+                        selectPlant(plant, holder)
+                    } else unselectPlant(plant, holder)
+                } else return@setOnClickListener
             }
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = plantsDataset.value?.size ?: 0
+
+
+    val mActionModeCallback : ActionMode.Callback = object : ActionMode.Callback {
+
+        override fun onDestroyActionMode(mode: ActionMode?) {
+            // TODO: store selected plants, fix multiple selection
+            actionMode = null
+            notifyDataSetChanged()
+        }
+
+        // Called when the action mode is created; startActionMode() was called
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            // Inflate a menu resource providing context menu items
+            val inflater: MenuInflater = mode.menuInflater
+            inflater.inflate(R.menu.plants_list_action_mode_menu, menu)
+            return true
+        }
+
+        // Called each time the action mode is shown. Always called after onCreateActionMode, but
+        // may be called multiple times if the mode is invalidated.
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return false // Return false if nothing is done
+        }
+
+        // Called when the user selects a contextual menu item
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.menu_delete -> {
+                    //TODO delete method
+                    //notifyDataSetChanged()
+                    Log.i("PlantsListActivity", "Delete plant")
+                    mode.finish() // Action picked, so close the CAB
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 }
