@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="activity_padding">8dp</dimen>
+    <!--Plants list dimens-->
+    <dimen name="list_item_margin">16dp</dimen>
+    <dimen name="list_plant_description_margin">16dp</dimen>
+    <dimen name="list_plant_name_text_size">8pt</dimen>
+    <dimen name="list_plant_type_text_size">6pt</dimen>
+    <dimen name="list_plant_pic_size">60dp</dimen>
+    <dimen name="list_water_button_size">40dp</dimen>
 </resources>

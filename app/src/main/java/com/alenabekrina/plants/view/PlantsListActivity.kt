@@ -10,11 +10,14 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.View
+import android.support.v7.widget.Toolbar
+import android.util.Log
+import android.view.*
 import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
+import com.bumptech.glide.Glide
 import javax.inject.Inject
 
 class PlantsListActivity : AppCompatActivity() {
@@ -24,6 +27,8 @@ class PlantsListActivity : AppCompatActivity() {
     private lateinit var plantsData: LiveData<List<Plant>>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private var mActionMode: ActionMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,7 @@ class PlantsListActivity : AppCompatActivity() {
 
         plantsData = viewModel.getPlantsDesc()
         plantsData.observe(this, Observer<List<Plant>> {
-            viewAdapter = PlantsListAdapter(plantsData)
+            viewAdapter = PlantsListAdapter(plantsData, Glide.with(this), this)
             plantsListRecyclerView = findViewById<RecyclerView>(R.id.plants_list_recycler_view).apply {
                 // use this setting to improve performance if you know that changes
                 // in content do not change the layout size of the RecyclerView
@@ -58,4 +63,6 @@ class PlantsListActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
 }
