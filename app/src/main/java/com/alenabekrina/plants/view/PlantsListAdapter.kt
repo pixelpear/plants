@@ -1,7 +1,6 @@
 package com.alenabekrina.plants.view
 
 import android.arch.lifecycle.LiveData
-import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -28,7 +27,7 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
 
         fun selectPlant(plant: Plant, holder: PlantViewHolder) {
             selectedPlants[plant.id] = plant
-            glide.load(R.drawable.plantpic)
+            glide.load(R.drawable.ic_check)
                 .into(holder.plantPic)
         }
 
@@ -46,9 +45,6 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
             }
         }
 
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder.
         class PlantViewHolder(val layout: ConstraintLayout) : RecyclerView.ViewHolder(layout) {
             val plantName = layout.findViewById<TextView>(R.id.textView_plant_name)
             val plantPic = layout.findViewById<ImageView>(R.id.imageView_plant_pic)
@@ -99,21 +95,16 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
 
     val mActionModeCallback : ActionMode.Callback = object : ActionMode.Callback {
 
-        // Called when the action mode is created; startActionMode() was called
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            // Inflate a menu resource providing context menu items
             val inflater: MenuInflater = mode.menuInflater
             inflater.inflate(R.menu.plants_list_action_mode_menu, menu)
             return true
         }
 
-        // Called each time the action mode is shown. Always called after onCreateActionMode, but
-        // may be called multiple times if the mode is invalidated.
         override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
             return false // Return false if nothing is done
         }
 
-        // Called when the user selects a contextual menu item
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.menu_delete -> {
@@ -127,7 +118,6 @@ class PlantsListAdapter(private val plantsDataset: LiveData<List<Plant>>,
         }
 
         override fun onDestroyActionMode(mode: ActionMode?) {
-            // TODO: store selected plants, fix multiple selection
             actionMode = null
             notifyDataSetChanged()
             selectedPlants.clear()

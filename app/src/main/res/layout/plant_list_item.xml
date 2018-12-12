@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/list_item_margin"
     android:layout_margin="@dimen/list_item_margin">
 
     <ImageView
@@ -43,8 +42,6 @@
         android:layout_width="@dimen/list_water_button_size"
         android:layout_height="@dimen/list_water_button_size"
         android:src="@drawable/ic_water_blue"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/textView_plant_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
