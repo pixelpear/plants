@@ -21,6 +21,11 @@
                   android:label="@string/addplantactivity_label"
                   android:parentActivityName="com.alenabekrina.plants.view.PlantsListActivity">
         </activity>
+        <receiver
+            android:name=".notifications.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
     </application>
 
 </manifest>
