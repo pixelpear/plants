@@ -1,43 +1,42 @@
 package com.alenabekrina.plants.notifications
 
-import android.app.Notification
-import android.app.NotificationChannel
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.support.v4.app.NotificationCompat
-import com.alenabekrina.plants.R
 import android.support.v4.app.NotificationManagerCompat
-
+import com.alenabekrina.plants.App
+import com.alenabekrina.plants.R
+import com.alenabekrina.plants.view.PlantsListActivity
+import javax.inject.Inject
 
 
 class AlarmReceiver: BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent?) {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE)
+    @Inject
+    lateinit var notificationManager: PlantsNotificationManager
 
-        val notification = NotificationCompat.Builder(context)
-            .setContentTitle("Random title")
-            .setContentText("Random text")
-            .setSmallIcon(R.drawable.ic_water_blue)
-            .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MyActivity.class), 0))
-            .build();
+    val uniqueID = 3657554
 
+    override fun onReceive(context: Context, intent: Intent) {
+        val app = context.applicationContext as App
+        app.component.injectAlarmReceiver(this)
 
-        val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Notification.Builder(context, NotificationChannel.DEFAULT_CHANNEL_ID)
+        val n = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationCompat.Builder(context, notificationManager.ANDROID_CHANNEL_ID)
         } else {
-            Notification.Builder(context)
+            NotificationCompat.Builder(context)
         }
-        builder.setContentTitle("My Title")
-        builder.setContentText("This is the Body")
-        builder.setSmallIcon(R.drawable.ic_water_blue)
 
-        val notificationCompat = builder.build()
-        val managerCompat = NotificationManagerCompat.from(this)
-        managerCompat.notify(NOTIFICATION_ID, notificationCompat)
-
-        notificationManager.notify(0, notification);
+        n.setSmallIcon(R.mipmap.ic_launcher)
+        n.setTicker("ticker")
+        n.setWhen(System.currentTimeMillis())
+        n.setContentTitle("title")
+        n.setContentText("text")
+        val it = Intent(context, PlantsListActivity::class.java)
+        val pi = PendingIntent.getBroadcast(context, 0, it, 0)
+        n.setContentIntent(pi)
+        NotificationManagerCompat.from(context).notify(uniqueID, n.build())
     }
 }

@@ -16,6 +16,7 @@ import android.view.*
 import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.notifications.PlantsNotificationManager
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
 import com.bumptech.glide.Glide
 import javax.inject.Inject
@@ -27,6 +28,8 @@ class PlantsListActivity : AppCompatActivity() {
     private lateinit var plantsData: LiveData<List<Plant>>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var plantsNotificationManager: PlantsNotificationManager
 
     private var mActionMode: ActionMode? = null
 
@@ -62,6 +65,7 @@ class PlantsListActivity : AppCompatActivity() {
             val intent = Intent(this, AddPlantActivity::class.java)
             startActivity(intent)
         }
+        plantsNotificationManager.scheduleNotification()
     }
 
 
