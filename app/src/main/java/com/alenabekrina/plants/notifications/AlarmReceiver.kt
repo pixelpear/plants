@@ -35,8 +35,9 @@ class AlarmReceiver: BroadcastReceiver() {
         n.setContentTitle("title")
         n.setContentText("text")
         val it = Intent(context, PlantsListActivity::class.java)
-        val pi = PendingIntent.getBroadcast(context, 0, it, 0)
+        val pi = PendingIntent.getActivity(context, 0, it, 0)
         n.setContentIntent(pi)
+        n.setAutoCancel(true)
         NotificationManagerCompat.from(context).notify(uniqueID, n.build())
     }
 }
