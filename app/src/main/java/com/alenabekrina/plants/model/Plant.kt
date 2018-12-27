@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.support.annotation.NonNull
+import org.threeten.bp.OffsetDateTime
 
 @Entity(tableName = "plants")
 class Plant {
@@ -21,6 +22,6 @@ class Plant {
     @ColumnInfo(name = "watering_period", typeAffinity = ColumnInfo.INTEGER)
     var wateringInterval: Int = 0
 
-    @ColumnInfo(name = "days_since_last_watering", typeAffinity = ColumnInfo.INTEGER)
-    var daysSinceLastWatering: Int = 0
+    @ColumnInfo(name = "last_watering_date", typeAffinity = ColumnInfo.TEXT)
+    lateinit var lastWateringDate: OffsetDateTime
 }

@@ -10,12 +10,11 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.*
 import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
+import com.alenabekrina.plants.notifications.NotificationsUtils
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
 import com.bumptech.glide.Glide
 import javax.inject.Inject
@@ -27,8 +26,6 @@ class PlantsListActivity : AppCompatActivity() {
     private lateinit var plantsData: LiveData<List<Plant>>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private var mActionMode: ActionMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

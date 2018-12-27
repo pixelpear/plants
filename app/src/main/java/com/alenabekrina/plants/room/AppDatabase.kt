@@ -7,7 +7,7 @@ import com.alenabekrina.plants.model.Converters
 import com.alenabekrina.plants.model.Plant
 import com.alenabekrina.plants.model.Watering
 
-@Database(entities = [Plant::class, Watering::class], version = 2)
+@Database(entities = [Plant::class, Watering::class], version = 3)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun plantDao(): PlantDao
