@@ -10,13 +10,11 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.*
 import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.model.Plant
-import com.alenabekrina.plants.notifications.PlantsNotificationManager
+import com.alenabekrina.plants.notifications.NotificationsUtils
 import com.alenabekrina.plants.viewmodel.PlantsViewModel
 import com.bumptech.glide.Glide
 import javax.inject.Inject
@@ -29,7 +27,7 @@ class PlantsListActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    lateinit var plantsNotificationManager: PlantsNotificationManager
+    lateinit var notificationsUtils: NotificationsUtils
 
     private var mActionMode: ActionMode? = null
 
@@ -65,7 +63,7 @@ class PlantsListActivity : AppCompatActivity() {
             val intent = Intent(this, AddPlantActivity::class.java)
             startActivity(intent)
         }
-        plantsNotificationManager.scheduleNotification()
+        notificationsUtils.scheduleNotification()
     }
 
 

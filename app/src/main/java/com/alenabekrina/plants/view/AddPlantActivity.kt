@@ -44,7 +44,7 @@ class AddPlantActivity : AppCompatActivity() {
     private fun savePlant(): Boolean {
         Log.i("AppPlantActivity", "saveApp")
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantsViewModel::class.java)
-        viewModel.insertPlant(editText_name.text.toString(), editText_type.text.toString(),
+        viewModel.createAndSavePlant(editText_name.text.toString(), editText_type.text.toString(),
             editText_watering_interval.text.toString(), editText_days_since_last_watering.text.toString())
         this.finish()
         return true

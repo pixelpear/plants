@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class AlarmReceiver: BroadcastReceiver() {
     @Inject
-    lateinit var notificationManager: PlantsNotificationManager
+    lateinit var notificationManager: NotificationsUtils
 
     val uniqueID = 3657554
 

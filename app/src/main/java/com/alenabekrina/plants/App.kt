@@ -5,6 +5,7 @@ import com.alenabekrina.plants.dagger.AppComponent
 import com.alenabekrina.plants.dagger.AppModule
 import com.alenabekrina.plants.dagger.DaggerAppComponent
 import com.alenabekrina.plants.dagger.DatabaseModule
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 class App: Application() {
     val component: AppComponent by lazy {
@@ -17,6 +18,7 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AndroidThreeTen.init(this)
         component.inject(this)
     }
 }
