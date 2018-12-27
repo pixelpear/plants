@@ -63,7 +63,6 @@ class PlantsListActivity : AppCompatActivity() {
             val intent = Intent(this, AddPlantActivity::class.java)
             startActivity(intent)
         }
-        notificationsUtils.scheduleNotification()
     }
 
 
