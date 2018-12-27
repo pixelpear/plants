@@ -36,7 +36,7 @@ class PlantsViewModel @Inject constructor(private val repository: Repository,
 
         // TODO: write this as test
         val now = OffsetDateTime.now()
-        notificationsUtils.scheduleNotification(now.withSecond(now.second + 3))
+        notificationsUtils.scheduleNotification(now.withSecond(now.second + 3), plant)
     }
 
 }

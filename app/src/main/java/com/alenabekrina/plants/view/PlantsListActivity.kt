@@ -26,10 +26,6 @@ class PlantsListActivity : AppCompatActivity() {
     private lateinit var plantsData: LiveData<List<Plant>>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject
-    lateinit var notificationsUtils: NotificationsUtils
-
-    private var mActionMode: ActionMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

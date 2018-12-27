@@ -18,6 +18,7 @@ import javax.inject.Inject
 class AddPlantActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModel: PlantsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,8 @@ class AddPlantActivity : AppCompatActivity() {
 
         val app = application as App
         app.component.injectAddPlantActivity(this)
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantsViewModel::class.java)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -43,7 +46,6 @@ class AddPlantActivity : AppCompatActivity() {
 
     private fun savePlant(): Boolean {
         Log.i("AppPlantActivity", "saveApp")
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantsViewModel::class.java)
         viewModel.createAndSavePlant(editText_name.text.toString(), editText_type.text.toString(),
             editText_watering_interval.text.toString(), editText_days_since_last_watering.text.toString())
         this.finish()

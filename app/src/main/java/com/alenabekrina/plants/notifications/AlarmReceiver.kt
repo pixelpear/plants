@@ -1,6 +1,8 @@
 package com.alenabekrina.plants.notifications
 
 import android.app.PendingIntent
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,6 +12,7 @@ import android.support.v4.app.NotificationManagerCompat
 import com.alenabekrina.plants.App
 import com.alenabekrina.plants.R
 import com.alenabekrina.plants.view.PlantsListActivity
+import com.alenabekrina.plants.viewmodel.PlantsViewModel
 import javax.inject.Inject
 
 
@@ -29,11 +32,14 @@ class AlarmReceiver: BroadcastReceiver() {
             NotificationCompat.Builder(context)
         }
 
+        val plantName: String = intent.extras["PlantName"] as String
+
+
         n.setSmallIcon(R.mipmap.ic_launcher)
         n.setTicker("ticker")
         n.setWhen(System.currentTimeMillis())
-        n.setContentTitle("title")
-        n.setContentText("text")
+        n.setContentTitle("Watering")
+        n.setContentText(plantName)
         val it = Intent(context, PlantsListActivity::class.java)
         val pi = PendingIntent.getActivity(context, 0, it, 0)
         n.setContentIntent(pi)
